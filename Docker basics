@@ -45,3 +45,24 @@ EXPOSE  Informs Docker that the container listens on a port.
 ENV     Sets environment variables.
 CMD        Provides the default command for the container.
 ENTRYPOINT Defines the main executable command for the container.
+
+
+docker commit:Takes a snapshot of a running or stopped container.
+Saves it as a new Docker image.
+Example: docker commit mycontainer mycustomimage:latest
+You can then reuse or share this image just like any other Docker image.
+
+
+
+The Docker -itd flag is a combination of three options used with docker run. Here's what each one means:
+🔹 -i (interactive)
+Keeps STDIN (input) open so you can interact with the container.
+Useful when running interactive programs like a shell.
+🔹 -t (tty)
+Allocates a pseudo-terminal inside the container.
+Makes the command-line interface behave more like a regular terminal (e.g., for bash).
+🔹 -d (detached)
+Runs the container in the background.
+You won't see live output unless you attach or log into it.
+💡 So, -itd together means:
+"Run the container in the background (-d), but also set it up to be interactive (-i) with a terminal (-t) if needed later."
