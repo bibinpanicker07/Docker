@@ -76,3 +76,6 @@ CMD:This Dockerfile instruction specifies the default command to run when the co
 This is the command that will be executed. It starts Nginx with the -g flag, which allows you to pass configuration options, and the daemon off; directive tells Nginx not to run as a daemon (background process). 
 Foreground Process:By preventing Nginx from running as a daemon, it becomes the main process of the container. Docker tracks this process, and the container will stay running as long as Nginx is active. 
 In essence, this command is a Docker best practice for running Nginx. It ensures that the container behaves as expected and allows for easier debugging if issues arise. If Nginx were to run as a daemon, it would quickly exit, and the container would stop running
+
+
+docker run -itd -p 80:80 apache-custom  --> LHS port is what web page is using and RHS is TCP port
