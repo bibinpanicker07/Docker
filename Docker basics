@@ -1,5 +1,6 @@
 1. What is Docker? How does it differ from virtual machines?
 Docker is a platform for containerizing applications, allowing them to run in isolated environments. Unlike VMs, Docker containers share the host OS kernel, making them lightweight and faster to start.
+A self-sufficient runtime for containers
 
 2. Explain the difference between CMD and ENTRYPOINT in a Dockerfile.
 CMD: Provides default arguments for the container. Can be overridden during docker run.
@@ -10,3 +11,37 @@ Conatiner are Nothing but an OS process, that behaves like VM using the Linux CO
 
 kernel is the core component that acts as a bridge between the hardware and the software. It manages all the critical operations of the system, including memory management, process scheduling, and device control. The kernel is the first program loaded when the system starts and the last to shut down, ensuring the smooth functioning of the entire system. 
 
+What is a Container?
+A container is a lightweight, standalone, and executable software package that includes everything needed to run an application: code, runtime, libraries, and dependencies. Containers ensure that applications run reliably across different environments by isolating them from the underlying infrastructure. They use the host operating system kernel, making them much more efficient and faster to deploy than virtual machines.
+
+Docker Architecture and Components:
+Docker uses a client-server architecture:
+Docker Client:The primary interface for users to interact with Docker.
+Commands like docker build, docker run, and docker pull are sent to the Docker Daemon.
+Docker Daemon (dockerd):The main service responsible for creating, managing, and running Docker containers.
+Listens for Docker API requests from the Docker client.
+Docker Images:Immutable snapshots of a container, including the application code, libraries, and dependencies.
+Can be pulled from Docker Hub or custom repositories.
+Docker Containers:Runtime instances of Docker images.
+Each container is isolated but shares the OS kernel with the host.
+Docker Registry:A centralized location for storing and distributing Docker images.
+Examples: Docker Hub, Amazon ECR, Google Container Registry.
+Storage Drivers:Manage how data is written and read on disk.
+Examples: OverlayFS, AUFS.
+Networking:Docker provides different networking modes (bridge, host, overlay) to allow communication between containers or with external networks.
+
+
+
+Dockerfile:A Dockerfile is a script containing a series of instructions to build a Docker image. 
+It automates the process of creating images, ensuring consistency and repeatability.
+
+Common Dockerfile Instructions
+---------------------------------
+FROM    Specifies the base image. For eg for Python App.
+RUN     Runs a command in the container.
+COPY    Copies files from the host to the container.
+WORKDIR Sets the working directory inside the container.
+EXPOSE  Informs Docker that the container listens on a port.
+ENV     Sets environment variables.
+CMD        Provides the default command for the container.
+ENTRYPOINT Defines the main executable command for the container.
