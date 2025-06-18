@@ -77,5 +77,10 @@ This is the command that will be executed. It starts Nginx with the -g flag, whi
 Foreground Process:By preventing Nginx from running as a daemon, it becomes the main process of the container. Docker tracks this process, and the container will stay running as long as Nginx is active. 
 In essence, this command is a Docker best practice for running Nginx. It ensures that the container behaves as expected and allows for easier debugging if issues arise. If Nginx were to run as a daemon, it would quickly exit, and the container would stop running
 
+| Web Server | Correct CMD                              |
+| ---------- | ---------------------------------------- |
+| Apache     | `CMD ["apache2ctl", "-D", "FOREGROUND"]` |
+| Nginx      | `CMD ["nginx", "-g", "daemon off;"]`     |
+
 
 docker run -itd -p 80:80 apache-custom  --> LHS port is what web page is using and RHS is TCP port
