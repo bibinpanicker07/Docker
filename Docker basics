@@ -1,0 +1,12 @@
+1. What is Docker? How does it differ from virtual machines?
+Docker is a platform for containerizing applications, allowing them to run in isolated environments. Unlike VMs, Docker containers share the host OS kernel, making them lightweight and faster to start.
+
+2. Explain the difference between CMD and ENTRYPOINT in a Dockerfile.
+CMD: Provides default arguments for the container. Can be overridden during docker run.
+ENTRYPOINT: Defines the main command for the container. Any arguments passed to docker run are appended to the ENTRYPOINT.
+
+Conatiners: 
+Conatiner are Nothing but an OS process, that behaves like VM using the Linux COncept of NS and Cgroup
+
+kernel is the core component that acts as a bridge between the hardware and the software. It manages all the critical operations of the system, including memory management, process scheduling, and device control. The kernel is the first program loaded when the system starts and the last to shut down, ensuring the smooth functioning of the entire system. 
+
