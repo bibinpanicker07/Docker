@@ -66,3 +66,13 @@ Runs the container in the background.
 You won't see live output unless you attach or log into it.
 💡 So, -itd together means:
 "Run the container in the background (-d), but also set it up to be interactive (-i) with a terminal (-t) if needed later."
+
+
+
+The CMD ["nginx", "-g", "daemon off;"] command in a Dockerfile is used to start the Nginx web server as the main process within a container and keep it running in the foreground, rather than as a background daemon. This ensures that the Docker container stays active as long as Nginx is running. 
+Here's a breakdown:
+CMD:This Dockerfile instruction specifies the default command to run when the container starts. 
+["nginx", "-g", "daemon off;"]:
+This is the command that will be executed. It starts Nginx with the -g flag, which allows you to pass configuration options, and the daemon off; directive tells Nginx not to run as a daemon (background process). 
+Foreground Process:By preventing Nginx from running as a daemon, it becomes the main process of the container. Docker tracks this process, and the container will stay running as long as Nginx is active. 
+In essence, this command is a Docker best practice for running Nginx. It ensures that the container behaves as expected and allows for easier debugging if issues arise. If Nginx were to run as a daemon, it would quickly exit, and the container would stop running
