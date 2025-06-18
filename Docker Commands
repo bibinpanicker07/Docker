@@ -1,0 +1,52 @@
+1. Docker Version & Info
+docker --version              # Show Docker version
+docker version                # Show detailed version info
+docker info                   # Show system-wide information
+
+2. Docker Images
+docker images                 # List all images
+docker pull <image_name>     # Download image from Docker Hub
+docker build -t <name> .     # Build image from Dockerfile
+docker rmi <image_id>        # Remove image
+docker tag <src> <target>    # Tag an image with a new name
+
+3. Docker Containers
+docker ps                     # List running containers
+docker ps -a                  # List all containers (including stopped)
+docker run <image>            # create and Run a container
+docker run -it <image>        # Run interactively with terminal
+docker run -d <image>         # Run in detached mode (in background)
+docker run --name <name> <image>   # Assign a name to the container
+docker start <container_id>   # Start a stopped container
+docker stop <container_id>    # Stop a running container
+docker restart <container_id> # Restart a container
+docker rm <container_id>      # Remove a container
+docker logs <container_id>    # View logs of a container
+docker exec -it <container_id> <bash/sh>  # Run command inside a running container
+
+4. Docker Volumes
+docker volume create <name>   # Create a volume
+docker volume ls              # List all volumes
+docker volume inspect <name>  # Show detailed info
+docker volume rm <name>       # Remove a volume
+
+5. Docker Networks
+docker network ls             # List all networks
+docker network create <name>  # Create a new network
+docker network inspect <name> # View network details
+docker network connect <network> <container>  # Connect container to a network
+docker network disconnect <network> <container>  # Disconnect from network
+docker network rm <name>      # Remove a network
+
+6. Docker Compose
+docker-compose up             # Start services defined in docker-compose.yml
+docker-compose up -d          # Start in detached mode
+docker-compose down           # Stop and remove containers, networks, etc.
+docker-compose build          # Build images
+docker-compose logs           # View logs
+docker-compose ps             # List containers
+
+7. Docker System Management
+docker system df              # Show disk usage
+docker system prune           # Remove unused data (images, containers, volumes)
+docker system prune -a        # Remove all unused data including images
