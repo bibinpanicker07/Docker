@@ -84,3 +84,14 @@ In essence, this command is a Docker best practice for running Nginx. It ensures
 
 
 docker run -itd -p 80:80 apache-custom  --> LHS port is what web page is using and RHS is TCP port
+
+sudo usermod -aG docker $USER
+is used to add your current user to the Docker group so you can run Docker commands without using sudo. Here's a breakdown of each part:
+🔍 Command Breakdown:
+Part	Meaning
+sudo	Runs the command as a superuser (administrator).
+usermod	A Linux command to modify a user account.
+-aG	Two options combined:
+- -a (append)	Adds the user to the group(s) without removing them from others.
+- -G docker	Specifies the group to add the user to — in this case, the docker group.
+$USER	An environment variable that expands to your current username.
