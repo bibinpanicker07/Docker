@@ -1,5 +1,8 @@
 1. What is Docker? How does it differ from virtual machines?
+Docker is a popular open-source containerization platform that allows developers to automate the deployment of applications inside lightweight, portable containers. Docker streamlines the process of creating, deploying, and managing containers. It provides tools for building and sharing containerized applications and includes a rich ecosystem of features like Docker Compose, Docker Swarm, and integration with Kubernetes.
+
 Docker is a platform for containerizing applications, allowing them to run in isolated environments. Unlike VMs, Docker containers share the host OS kernel, making them lightweight and faster to start.
+
 A self-sufficient runtime for containers
 
 2. Explain the difference between CMD and ENTRYPOINT in a Dockerfile.
@@ -153,3 +156,9 @@ Permissions are represented using a three-digit octal (base-8) number. Each digi
 1: Execute (x) Grant execute permission
 Usage of `chmod +x <filename>` in Linux
 The command chmod +x <filename> is used to add executable permissions to a file in Linux system. 
+
+
+
+# How does Docker ensure portability of applications?
+Answer:Docker achieves portability by encapsulating an application, its dependencies, and its runtime environment into an image. Images are immutable and can run on any system with Docker installed, regardless of the underlying OS.
+
