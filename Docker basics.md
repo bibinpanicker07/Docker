@@ -159,6 +159,109 @@ The command chmod +x <filename> is used to add executable permissions to a file 
 
 
 
-# How does Docker ensure portability of applications?
+### How does Docker ensure portability of applications?
 Answer:Docker achieves portability by encapsulating an application, its dependencies, and its runtime environment into an image. Images are immutable and can run on any system with Docker installed, regardless of the underlying OS.
+
+### How does Docker handle inter-container communication?
+
+Docker provides several built-in mechanisms to handle inter-container communication, especially useful when you're running multi-container applications (like a web app + database). Here's how it works:
+
+🔗 1. Bridge Network (Default)
+When you run containers without specifying a custom network, Docker connects them to a default bridge network. But:
+
+Containers can’t reach each other by name — only by IP address.
+
+You’d need to manually link them or configure them.
+
+Example:
+bash
+Copy
+Edit
+docker run -d --name webapp nginx
+docker run -d --name db mysql
+➡️ These can't talk to each other by name on the default bridge.
+
+🌐 2. User-Defined Bridge Network ✅ Recommended
+Creating a custom bridge network allows containers to communicate using container names as hostnames.
+
+Steps:
+bash
+Copy
+Edit
+# Create custom network
+docker network create mynet
+
+# Run containers on that network
+docker run -d --name db --network mynet mysql
+docker run -d --name webapp --network mynet nginx
+➡️ Now, webapp can talk to db just by using the name db.
+
+bash
+Copy
+Edit
+ping db
+✅ Benefits:
+Name-based communication
+
+DNS-based service discovery
+
+Easier scaling (e.g., with Docker Compose)
+
+📦 3. Docker Compose (Under the Hood)
+Docker Compose automatically creates a custom bridge network for all services defined in a docker-compose.yml.
+
+yaml
+Copy
+Edit
+services:
+  web:
+    image: nginx
+  db:
+    image: mysql
+➡️ web can connect to db using the hostname db.
+
+🛠 4. Host Networking (Advanced Use Case)
+bash
+Copy
+Edit
+docker run --network host ...
+Container shares the host’s network stack.
+
+No isolation — all ports exposed directly.
+
+Useful for performance or special network apps (e.g. monitoring, VPNs)
+
+⚠️ Not available on Docker Desktop (macOS/Windows) — only on Linux.
+
+🕸 5. Overlay Network (for Swarm / Kubernetes)
+Used when containers run on different hosts in a cluster (like Docker Swarm or Kubernetes):
+
+Docker manages an overlay network that spans multiple machines.
+
+Services discover each other by name via internal DNS.
+
+🧪 Example: Simple Web App + Redis
+bash
+Copy
+Edit
+docker network create appnet
+docker run -d --name redis --network appnet redis
+docker run -it --name web --network appnet python:3 bash
+Inside web:
+
+bash
+Copy
+Edit
+pip install redis
+python
+>>> import redis
+>>> r = redis.Redis(host='redis', port=6379)
+>>> r.set('key', 'value')
+📝 Summary Table
+Network Type	Name-based Access	Same Host	Multi-host
+Default bridge	❌ No	✅ Yes	❌ No
+Custom bridge	✅ Yes	✅ Yes	❌ No
+Docker Compose	✅ Yes	✅ Yes	❌ No
+Host	❌ (shares host)	✅ Yes	❌ No
+Overlay (Swarm/K8s)	✅ Yes	❌ Optional	✅ Yes
 
