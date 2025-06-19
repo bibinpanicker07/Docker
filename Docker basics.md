@@ -4,11 +4,11 @@ Docker is a popular open-source containerization platform that allows developers
 Docker is a platform for containerizing applications, allowing them to run in isolated environments. Unlike VMs, Docker containers share the host OS kernel, making them lightweight and faster to start.
 
 A self-sufficient runtime for containers
-
+```
 2. Explain the difference between CMD and ENTRYPOINT in a Dockerfile.
 CMD: Provides default arguments for the container. Can be overridden during docker run.
 ENTRYPOINT: Defines the main command for the container. Any arguments passed to docker run are appended to the ENTRYPOINT.
-
+```
 Conatiners: 
 Conatiner are Nothing but an OS process, that behaves like VM using the Linux COncept of NS and Cgroup
 
