@@ -52,6 +52,7 @@ Saves it as a new Docker image.
 Example: docker commit mycontainer mycustomimage:latest
 You can then reuse or share this image just like any other Docker image.
 
+docker0 is a virtual Ethernet bridge interface created by Docker. It acts as the default network bridge for containers that are not explicitly connected to a user-defined network, enabling them to communicate with each other and with the host machine. 
 
 
 The Docker -itd flag is a combination of three options used with docker run. Here's what each one means:
@@ -65,7 +66,7 @@ Makes the command-line interface behave more like a regular terminal (e.g., for 
 Runs the container in the background.
 You won't see live output unless you attach or log into it.
 💡 So, -itd together means:
-"Run the container in the background (-d), but also set it up to be interactive (-i) with a terminal (-t) if needed later."
+"Run the container in the background (-d), but also set it up to be interactive (-i) with a terminal (-t) if needed later." 
 
 
 
@@ -83,9 +84,13 @@ In essence, this command is a Docker best practice for running Nginx. It ensures
 | Nginx      | `CMD ["nginx", "-g", "daemon off;"]`     |
 
 
+ENTRYPOINT ["python"]
+CMD ["abc.py"]
+Here entrypoint remains constant and cmd can by overriden by anything else Eg:xyz.py
+
 docker run -itd -p 80:80 apache-custom  --> LHS port is what web page is using and RHS is TCP port
 
-sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER #logout and login again for it to reflect
 is used to add your current user to the Docker group so you can run Docker commands without using sudo. Here's a breakdown of each part:
 🔍 Command Breakdown:
 Part	Meaning
@@ -95,3 +100,56 @@ usermod	A Linux command to modify a user account.
 - -a (append)	Adds the user to the group(s) without removing them from others.
 - -G docker	Specifies the group to add the user to — in this case, the docker group.
 $USER	An environment variable that expands to your current username.
+to view the groups -> cd /etc/group
+
+
+Running a container as a job usually means running a short-lived Docker container that performs a task, then exits. This is different from long-running services or daemons.
+A "job container" is:
+Started
+Performs a task (e.g., runs a script, builds code, backs up data)
+Stops automatically once the task is complete
+✅ Example 1: Run a script in a container
+docker run --rm ubuntu bash -c "echo Hello, World!"
+--rm: Automatically removes the container after it exits
+ubuntu: Image used
+bash -c "...": The command that runs in the container
+✅ Example 2: Job that runs a Python script
+Assume you have a Python script (job.py) in your current directory:
+docker run --rm -v "$PWD":/app -w /app python:3.10 python job.py
+Mounts current directory to /app inside the container
+Runs job.py using the official Python image
+Deletes the container afterward
+🛠️ Use Cases for Job Containers
+CI/CD tasks (e.g., test runners, linters, compilers)
+Database migrations
+Scheduled tasks (when run by a cron job or orchestrator)
+One-time tasks like cleanup scripts
+
+Docker Volume
+pwd
+/home/ubuntu/jenkinshome
+docker run -itd -p 80:80 -v /home/ubuntu/jenkinshome:/var/jenkins_home --name=jenk jenkins/jenkins:lts
+
+or docker volume create myvol
+docker volumne inspect myvol
+
+| Feature                | `-v myvol:/code`            | `-v $(pwd):/code`                  |
+| ---------------------- | --------------------------- | ---------------------------------- |
+| Type                   | Docker volume               | Bind mount                         |
+| Where it's stored      | Inside Docker system folder | Your actual local project folder   |
+| Host-visible files     | ❌ Not easily accessible     | ✅ Directly accessible and editable |
+| Persistent across runs | ✅ Yes                       | ✅ Yes (as long as the path exists) |
+| Best for               | Data volumes, DBs, backups  | Code development, local testing    |
+
+Docker follows a layered architecture
+If we use RUN multiple times it will create new layers so the best practise is use to use RUN once and the commands separated by &&
+
+
+
+File Level permissions-
+Permissions are represented using a three-digit octal (base-8) number. Each digit corresponds to a permission set (owner, group, others) and is the sum of the values:
+4: Read (r) Grants read permission
+2: Write (w) Grant write permission
+1: Execute (x) Grant execute permission
+Usage of `chmod +x <filename>` in Linux
+The command chmod +x <filename> is used to add executable permissions to a file in Linux system. 
