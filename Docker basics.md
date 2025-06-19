@@ -4,11 +4,11 @@ Docker is a popular open-source containerization platform that allows developers
 Docker is a platform for containerizing applications, allowing them to run in isolated environments. Unlike VMs, Docker containers share the host OS kernel, making them lightweight and faster to start.
 
 A self-sufficient runtime for containers
-```
+
 2. Explain the difference between CMD and ENTRYPOINT in a Dockerfile.
 CMD: Provides default arguments for the container. Can be overridden during docker run.
 ENTRYPOINT: Defines the main command for the container. Any arguments passed to docker run are appended to the ENTRYPOINT.
-```
+
 Conatiners: 
 Conatiner are Nothing but an OS process, that behaves like VM using the Linux COncept of NS and Cgroup
 
@@ -73,7 +73,7 @@ You won't see live output unless you attach or log into it.
 
 
 
-The CMD ["nginx", "-g", "daemon off;"] command in a Dockerfile is used to start the Nginx web server as the main process within a container and keep it running in the foreground, rather than as a background daemon. This ensures that the Docker container stays active as long as Nginx is running. 
+The CMD ```["nginx", "-g", "daemon off;"] ```command in a Dockerfile is used to start the Nginx web server as the main process within a container and keep it running in the foreground, rather than as a background daemon. This ensures that the Docker container stays active as long as Nginx is running. 
 Here's a breakdown:
 CMD:This Dockerfile instruction specifies the default command to run when the container starts. 
 ["nginx", "-g", "daemon off;"]:
@@ -91,9 +91,9 @@ ENTRYPOINT ["python"]
 CMD ["abc.py"]
 Here entrypoint remains constant and cmd can by overriden by anything else Eg:xyz.py
 
-docker run -itd -p 80:80 apache-custom  --> LHS port is what web page is using and RHS is TCP port
+```docker run -itd -p 80:80 apache-custom ``` --> LHS port is what web page is using and RHS is TCP port
 
-sudo usermod -aG docker $USER #logout and login again for it to reflect
+```sudo usermod -aG docker $USER``` #logout and login again for it to reflect
 is used to add your current user to the Docker group so you can run Docker commands without using sudo. Here's a breakdown of each part:
 🔍 Command Breakdown:
 Part	Meaning
@@ -112,13 +112,13 @@ Started
 Performs a task (e.g., runs a script, builds code, backs up data)
 Stops automatically once the task is complete
 ✅ Example 1: Run a script in a container
-docker run --rm ubuntu bash -c "echo Hello, World!"
+```docker run --rm ubuntu bash -c "echo Hello, World!"```
 --rm: Automatically removes the container after it exits
 ubuntu: Image used
 bash -c "...": The command that runs in the container
 ✅ Example 2: Job that runs a Python script
 Assume you have a Python script (job.py) in your current directory:
-docker run --rm -v "$PWD":/app -w /app python:3.10 python job.py
+```docker run --rm -v "$PWD":/app -w /app python:3.10 python job.py```
 Mounts current directory to /app inside the container
 Runs job.py using the official Python image
 Deletes the container afterward
@@ -131,7 +131,7 @@ One-time tasks like cleanup scripts
 Docker Volume
 pwd
 /home/ubuntu/jenkinshome
-docker run -itd -p 80:80 -v /home/ubuntu/jenkinshome:/var/jenkins_home --name=jenk jenkins/jenkins:lts
+```docker run -itd -p 80:80 -v /home/ubuntu/jenkinshome:/var/jenkins_home --name=jenk jenkins/jenkins:lts```
 
 or docker volume create myvol
 docker volumne inspect myvol
