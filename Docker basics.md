@@ -39,7 +39,7 @@ Dockerfile:A Dockerfile is a script containing a series of instructions to build
 It automates the process of creating images, ensuring consistency and repeatability.
 
 Common Dockerfile Instructions
-
+```
 FROM    Specifies the base image. For eg for Python App.
 RUN     Runs a command in the container.
 COPY    Copies files from the host to the container.
@@ -48,7 +48,7 @@ EXPOSE  Informs Docker that the container listens on a port.
 ENV     Sets environment variables.
 CMD        Provides the default command for the container.
 ENTRYPOINT Defines the main executable command for the container.
-
+```
 
 docker commit:Takes a snapshot of a running or stopped container.
 Saves it as a new Docker image.
