@@ -39,7 +39,7 @@ Dockerfile:A Dockerfile is a script containing a series of instructions to build
 It automates the process of creating images, ensuring consistency and repeatability.
 
 Common Dockerfile Instructions
----------------------------------
+
 FROM    Specifies the base image. For eg for Python App.
 RUN     Runs a command in the container.
 COPY    Copies files from the host to the container.
